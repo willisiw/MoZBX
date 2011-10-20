@@ -118,7 +118,7 @@
                     Mobile Zabbix version <b><?php echo $arrSettings["mZabbixVersion"]?></b><br />
                     In development by <b>Mattias Geniar</b>
                 </li>
-                
+                <li><a href="feedback.php" target="_webapp"><img src="images/feedback.png" class="icon_list">Send feedback</a></li>
                 <li class="title">Changelog: version 0.3</li>                
                 <li class="small">
                     <u>New features</u> <br />
