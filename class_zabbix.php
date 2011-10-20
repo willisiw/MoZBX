@@ -41,7 +41,8 @@
 		private $json_debug				= null;
 		private $zabbix_tmp_cookies		= "";
 		private $zabbix_url_graph		= "";
-		private	$zabbix_url_index		= "";
+		private $zabbix_url_map    = "";
+		private $zabbix_url_index		= "";
 
 
 
@@ -101,9 +102,10 @@
 			$this->zabbix_hostname		= $arrSettings["zabbixHostname"];
 			$this->zabbix_tmp_cookies 	= $arrSettings["pathCookiesStorage"];
 			$this->zabbix_url_graph		= $arrSettings["zabbixApiUrl"] ."chart2.php";
+			$this->zabbix_url_map    = $arrSettings["zabbixApiUrl"] ."map.php";
 			$this->zabbix_url_index		= $arrSettings["zabbixApiUrl"] ."index.php";
 			$this->json_debug			= $arrSettings["jsonDebug"];
-            $this->json_debug_path	    = $arrSettings["jsonDebug_path"];
+			$this->json_debug_path	    = $arrSettings["jsonDebug_path"];
 		}
 
 		
@@ -304,7 +306,7 @@
 			if (isset($result->result)) {
 				$trigger_objects= $result->result;
 
-				if (is_array($trigger_objects) && count($trigger_objects) > 0) {
+				if (isset($trigger_objects) && count($trigger_objects) > 0) {
 					$arrTriggers = array();
 					foreach ($trigger_objects as $object) {
 						$arrTriggers[$object->triggerid] = $this->convertTriggerJson($object);									
@@ -330,7 +332,7 @@
 			if (isset($result->result)) {
 				$trigger_objects= $result->result;
 				
-				if (is_array($trigger_objects) && count($trigger_objects) > 0) {
+				if (isset($trigger_objects) && count($trigger_objects) > 0) {
 					$arrTriggers = array();
 					foreach ($trigger_objects as $object) {
 						$arrTriggers[$object->triggerid] = $this->convertTriggerJson($object);									
@@ -511,6 +513,69 @@
 			// Return the image
 			return $output;
 		}
+
+
+
+	 // New MAP Funcations   ############################################################
+	 
+		public function getMaps ($mapid) {
+			$result  = $this->sendRequest("map.get", 
+					array ("output" => "extend"));
+				$map_object = $result->result;
+	
+			 if (isset($mapid)) {
+					foreach ($map_object as $map) {
+										 if ($mapid == $map->sysmapid) {
+											 $output = $map;
+										 }
+					}
+				 return $output;
+			 } // END  if (isset($mapid))
+			 
+			if (isset($map_object)) {
+				return $map_object;
+			} else {
+				return false;
+			} //END  if (isset($map_object))
+		}
+	
+		
+		public function getMapImageById ($mapid) {
+			$filename_cookie   = $this->zabbix_tmp_cookies . "zabbix_cookie_". $mapid .".txt";
+	
+			$ch = curl_init();
+			curl_setopt($ch, CURLOPT_URL,  $this->zabbix_url_index);
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+			curl_setopt($ch, CURLOPT_POST, true);
+			curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+			$post_data = array(
+				'name' => $this->getUsername(),
+				'password' => $this->getPassword(),
+				'enter' => 'Enter'
+				);
+			curl_setopt($ch, CURLOPT_POSTFIELDS, $post_data);
+			curl_setopt($ch, CURLOPT_COOKIEJAR, $filename_cookie);
+			curl_setopt($ch, CURLOPT_COOKIEFILE, $filename_cookie);
+			
+			// Login
+			curl_exec($ch);
+			
+			// Fetch image using sysmapid
+			curl_setopt($ch, CURLOPT_URL, $this->zabbix_url_map ."?sysmapid=". $mapid);
+			$output = curl_exec($ch);
+			
+			// Close session
+			curl_close($ch);
+			
+			// Delete our cookie 
+			unlink($filename_cookie);
+			
+			// Return the image
+			return $output;
+		}
+	 // END New Map Functions  ############################################################
+
+
 
 
 
