@@ -314,7 +314,7 @@
           ?>
             <li>
               API URL<br />
-              <input type='text' name='zabbixApi' value="http://10.10.21.25/zabbix/api_jsonrpc.php" style="<?php echo $arrSettings["cssStyleTextfield"]?>" />LAN
+              <input type='text' name='zabbixApi' value='<?php echo isset($_POST['zabbixApi']) ? $_POST['zabbixApi'] : $zabbixApi ?>'  style="<?php echo $arrSettings["cssStyleTextfield"]?>" />LAN
   
             </li>
           <?php          
