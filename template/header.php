@@ -4,7 +4,7 @@
 <head>
 <title>Mobile ZBX</title>
 <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;"/>
-<link rel="apple-touch-icon" href="../iui/iui-logo-touch-icon.png" />
+<link rel="apple-touch-icon" href="images/MoZBX.png" />
 <meta name="apple-touch-fullscreen" content="YES" />
 
 <script src="jqtouch/jquery-1.4.2.js" type="application/x-javascript" charset="utf-8"></script>
