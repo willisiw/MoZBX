@@ -48,7 +48,7 @@
 	/* Where should we store our tempory cookie files? */
 	$arrSettings["pathCookiesStorage"]		= "/tmp/";
 	
-	/* What URL are we on? */
+	/* What URL are we on? (exclude hostname if accessing from multiple hostnames, ie "/mozbx/") */
 	$arrSettings["urlApplication"]			= "http://dev.mozbx.net/MoZBX/";
 	
 	/* #########################################################################
