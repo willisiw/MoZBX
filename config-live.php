@@ -67,7 +67,10 @@
 	
 	/* Show empty hostgroups ? */
 	$arrSettings["showEmptyHostgroups"]		= false;
-	
+		
+	/* Default Map on front screen using Zabbix sysmapid.  Not set hides map. */
+	$arrSettings["mZabbixMapId"]				= "1";
+
 	/* Minimum severity for triggers to be shown? */
 	/* This can help keep pages quick, if you can ignore ie. all information/not classified triggers you don't want */
 	/* 0: not classified, 1: information, 2: warning, 3: average, 4: high, 5: disaster */
