@@ -38,10 +38,13 @@
         <img src="graph_img.php?graphid=<?=$zabbixGraphId?>&period=<?=$zabbixGraphPeriod?>" width="500" />
         <ul class="rounded">
             <li><a href="graph.php?graphid=<?=$zabbixGraphId?>&period=3600">1 hour</a></li>
-            <li><a href="graph.php?graphid=<?=$zabbixGraphId?>&period=7200">2 hours</a></li>
             <li><a href="graph.php?graphid=<?=$zabbixGraphId?>&period=10800">3 hours</a></li>
             <li><a href="graph.php?graphid=<?=$zabbixGraphId?>&period=21600">6 hours</a></li>            
             <li><a href="graph.php?graphid=<?=$zabbixGraphId?>&period=43200">12 hours</a></li>
+            <li><a href="graph.php?graphid=<?=$zabbixGraphId?>&period=86400">24 hours</a></li>
+            <li><a href="graph.php?graphid=<?=$zabbixGraphId?>&period=302400">Half week</a></li>
+            <li><a href="graph.php?graphid=<?=$zabbixGraphId?>&period=604800">1 week</a></li>
+
         </ul>
 	</div>
 <?php
