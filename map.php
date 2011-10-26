@@ -4,7 +4,7 @@
  * This page builds the html to display a map image.
  *
  * Duplicate and modification of graph.php.  
- * 2011-10-20
+ * 2011-10-26
  *
  * ?sysmapid={NUMBER}
  *   NUMBER is the zabbix sysmapid of the map
